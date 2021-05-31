@@ -1,9 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Gulmira Abdullayeva](https://up.htmlacademy.ru/javascript/23/user/1685769).
-* Наставник: `Белик Павел`.
-
----
+* Наставник:[Белик Павел](https://up.htmlacademy.ru/javascript/23/user/84572).
 
 _Не удаляйте и не изменяйте самовольно файлы и папки:_
 _`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `package-lock.json`, `package.json`., `.github`_
