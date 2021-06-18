@@ -5,8 +5,8 @@ function getRandomPositiveFloat (a, b, digits = 1) {
   // Чтобы не заставлять пользователя нашей функции помнить порядок аргументов,
   // реализуем поддержку передачи минимального и максимального значения в любом порядке,
   // а какое из них большее и меньшее вычислим с помощью Math.min и Math.max
-  const lower = Math.min(Math.abs(a), Math.abs(b));
-  const upper = Math.max(Math.abs(a), Math.abs(b));
+  const lower = Math.min(Math.abs(a), Math.abs(b))
+  const upper = Math.max(Math.abs(a), Math.abs(b))
   // Обратите внимание, чтобы учесть условие, что диапазон может быть [0, ∞),
   // мы не ругаем пользователя за переданное отрицательное число,
   // а просто берём его по модулю с помощью Math.abs
@@ -14,9 +14,11 @@ function getRandomPositiveFloat (a, b, digits = 1) {
   // Дальше используем Math.random() для получения случайного дробного числа в диапазоне [0, 1),
   // которое домножаем на разницу между переданными числами - это будет наша случайная дельта.
   // После нужно сложить дельту с минимальным значением, чтобы получить итоговое случайное число.
-  const result = Math.random() * (upper - lower) + lower;
+  const result = Math.random() * (upper - lower) + lower
 
   // И в конце с помощью метода toFixed любого числа в JavaScript
   // указать требуемое количество знаков после точки
-  return result.toFixed(digits);
+  return result.toFixed(digits)
 }
+// getRandomPositiveFloat(1.4, 9.7)
+export { getRandomPositiveFloat }
