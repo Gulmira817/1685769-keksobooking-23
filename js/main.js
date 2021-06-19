@@ -1,25 +1,16 @@
-// import {
-//   getRandomMyPositiveInteger, checkRepeatElements
-// } from './utils/get-random-my-positive-integer'
 
-const checkRepeatElements = function (array) {
-  // const array = [
-  //   'wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'
-  // ]
-  const element = array[Math.ceil(Math.random(0, array.length - 1) * 4)]
+const checkRepeatElements = function (elementsOfArray) {
+  const element = elementsOfArray[Math.ceil(Math.random(0, elementsOfArray.length - 1) * 4)]
   console.log('element ' + element)
-  // const indices = [0, 1, 2, 4, 5]
   const indices = []
-  const indexArray = array.indexOf(element)
+  const indexArray = elementsOfArray.indexOf(element)
   if (indices.length === 0) {
     indices.push(indexArray)
-    // console.log('indices ' + indices)
   } else {
     let idx = indices.indexOf(indexArray)
-    // console.log('idx ' + idx)
     if (idx === -1) {
       indices.push(indexArray)
-      idx = array.indexOf(element, idx + 1)
+      idx = elementsOfArray.indexOf(element, idx + 1)
     }
   }
   return element
