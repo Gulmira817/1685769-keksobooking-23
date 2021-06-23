@@ -1,5 +1,5 @@
-import { getRandomMyPositiveInteger, checkRepeatElements } from '../utils'
-
+import { getRandomMyPositiveInteger } from '../utils/get-random-my-positive-integer.js'
+import { checkRepeatElements } from '../utils/check-repeat-elements.js'
 const createObject = () => {
   const objectArray = []
   const price = Math.floor(Math.random() * 5550)
@@ -54,10 +54,5 @@ const createObject = () => {
   )
   return objectArray
 }
-let i = 0
-const roots = []
-while (i !== 10) {
-  roots.push(createObject())
-  i++
-}
-console.log(roots)
+createObject()
+export { createObject }
