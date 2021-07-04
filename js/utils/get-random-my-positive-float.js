@@ -1,7 +1,7 @@
 const randomFunctionDouble = (startRandomNumber, toRandomNumber, count) => {
   if (startRandomNumber >= 0 && toRandomNumber >= 0) {
     if (startRandomNumber <= toRandomNumber) {
-      let result = (Math.ceil(Math.random()))
+      let result = (Math.ceil(Math.random() * (toRandomNumber - startRandomNumber) + startRandomNumber))
       count = Math.pow(10, count)
       result = result / count
       return result
