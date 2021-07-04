@@ -1,7 +1,7 @@
 const getRandomMyPositiveInteger = (startRandomNumber, toRandomNumber) => {
   if (startRandomNumber >= 0 && toRandomNumber >= 0) {
     if (startRandomNumber <= toRandomNumber) {
-      const randomNumber = Math.floor(Math.random() * 2)
+      const randomNumber = Math.floor(Math.random() * (toRandomNumber - startRandomNumber) + startRandomNumber)
       if (randomNumber.toString().length === 1) {
         return '0' + randomNumber
       } else {
