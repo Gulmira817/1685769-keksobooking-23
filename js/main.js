@@ -1,10 +1,15 @@
-import { generateSimilarElements } from './utils/generate-similar-elements.js'
-import { disableField } from './utils/form.js'
-const mapCanvas = document.querySelector('#map-canvas')
-mapCanvas.appendChild(generateSimilarElements())
-
-// mapCanvas.appendChild(generateSimilarElements())
-// // const elements =
-// const form = document.querySelector('form')
-// const elementsForm = form.querySelectorAll('.ad-form__element')
-// disableField(elementsForm)
+// import { generateSimilarElements } from "./utils/generate-similar-elements.js";
+// import { formPage } from "./utils/form.js";
+import { formPage } from "./utils/form.js";
+// import { mapInit } from "./utils/map.js";
+// const mapCanvas = document.querySelector("#map-canvas");
+// mapCanvas.appendChild(generateSimilarElements());
+// mapInit();
+formPage();
+// const form = document.querySelector(".map__filters");
+// const elementsForm = form.querySelectorAll(".map__filter");
+// const form2 = document.querySelector(".ad-form");
+// const elementsForm2 = form2.querySelectorAll(".ad-form__element");
+// modeField(elementsForm, true);
+// modeField(elementsForm2, true);
+// formPage();
