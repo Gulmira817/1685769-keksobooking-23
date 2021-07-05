@@ -1,4 +1,5 @@
 import { generateSimilarElements } from './utils/generate-similar-elements.js'
+import { disableField } from './utils/form.js'
 const mapCanvas = document.querySelector('#map-canvas')
 mapCanvas.appendChild(generateSimilarElements())
 
