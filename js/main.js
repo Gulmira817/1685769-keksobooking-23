@@ -1,15 +1,14 @@
-// import { generateSimilarElements } from "./utils/generate-similar-elements.js";
-// import { formPage } from "./utils/form.js";
 import { formPage } from "./utils/form.js";
-// import { mapInit } from "./utils/map.js";
-// const mapCanvas = document.querySelector("#map-canvas");
-// mapCanvas.appendChild(generateSimilarElements());
-// mapInit();
+import { getRandomSorter, createGetRandomItem } from "./utils.js";
 formPage();
-// const form = document.querySelector(".map__filters");
-// const elementsForm = form.querySelectorAll(".map__filter");
-// const form2 = document.querySelector(".ad-form");
-// const elementsForm2 = form2.querySelectorAll(".ad-form__element");
-// modeField(elementsForm, true);
-// modeField(elementsForm2, true);
-// formPage();
+// const numbers = [12, 2, 34, 4, 6, 11, 7, 67, 9];
+// console.log(getRandomSorter());
+// const mixed = [...numbers].sort(getRandomSorter);
+// console.log(mixed);
+// console.log(numbers.sort(getRandomSorter));
+// // const elem = createGetRandomItem(numbers);
+// // console.log(createGetRandomItem(numbers));
+// // console.log(createGetRandomItem(elem()));
+// for (let i = 0; i < 10; i++) {
+//   console.log(createGetRandomItem(numbers));
+// }
