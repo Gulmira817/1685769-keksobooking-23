@@ -19,15 +19,4 @@ export const PHOTOS = [
   `${PHOTOS_URL}/claire-rendall-b6kAwr1i0Iw.jpg`,
 ];
 
-export const AVATAR_NUMBERS = [
-  "01",
-  "02",
-  "03",
-  "04",
-  "05",
-  "06",
-  "07",
-  "08",
-  "09",
-  "10",
-];
+export const AVATAR_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

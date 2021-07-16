@@ -1,14 +1,18 @@
 import { formPage } from "./utils/form.js";
+import { createObject } from "./data/data2.js";
 import { getRandomSorter, createGetRandomItem } from "./utils.js";
-formPage();
-// const numbers = [12, 2, 34, 4, 6, 11, 7, 67, 9];
-// console.log(getRandomSorter());
-// const mixed = [...numbers].sort(getRandomSorter);
-// console.log(mixed);
-// console.log(numbers.sort(getRandomSorter));
-// // const elem = createGetRandomItem(numbers);
-// // console.log(createGetRandomItem(numbers));
-// // console.log(createGetRandomItem(elem()));
-// for (let i = 0; i < 10; i++) {
-//   console.log(createGetRandomItem(numbers));
-// }
+// formPage();
+const ad = createObject();
+
+const numbers = [12, 2, 34, 4, 6, 11, 7, 67, 9];
+
+const getCreateObjects = (count) => {
+  const randObjs = [];
+  for (let i = 0; i < count; i++) {
+    randObjs.push(createObject());
+  }
+  return randObjs;
+};
+
+const objs = getCreateObjects(4);
+console.log(objs);

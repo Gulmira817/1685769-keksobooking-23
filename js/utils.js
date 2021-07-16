@@ -44,35 +44,41 @@ export function getRandomPositiveFloat(a, b, digits = 1) {
 }
 
 export const getRandomSorter = () => Math.floor(Math.random() * 3) - 1;
+export const randomCompareItems = () => Math.floor(Math.random() * 30) - 10;
 
 export const createGetRandomItem = (data) => {
-  const mixed = [...data].sort(getRandomSorter);
-  const l = mixed.length;
-  let i = 0;
+  const mixed = [...data].sort(randomCompareItems);
+  // const l = mixed.length;
+  let idx = 0;
+  const getRandomItem = () => {
+    const result = mixed[idx % mixed.length];
+    idx = idx + 1;
+    return result;
+  };
+  return getRandomItem;
   return () => console.log(mixed[i++ % l]);
-};
-
-export const getRandomBoolean = () => Math.random() >= 0.5;
-
-export const getRandomItem = (array, canBeEmpty = true) => {
-  const result = array.filter(getRandomBoolean);
-  if (!canBeEmpty && result.length < 1) {
-    result.push(array(Math.floor(Math.random() * array.length)));
-  }
-  return result;
 };
 
 export const getRandomFloat = (...args) => {
   const [min, max, pow] = [
     Math.min(args[0], args[1]),
     Math.max(args[0], args[1]),
-    Math.pow(args[2], 10),
+    Math.pow(10, args[2] ?? 0),
   ];
-  return Math.round((Math.random() * (max - min) + min) * pow) / pow;
+  return Math.round((Math.random() * (max - min) + min) / pow) * pow;
+};
+export const getRandomBoolean = () => Math.random() >= 0.5;
+export const getRandomItem = (array) => array[getRandomFloat(0, array.length)];
+export const getRandomItems = (array, canBeEmpty = true) => {
+  const result = array.filter(getRandomBoolean);
+  if (!canBeEmpty && result.length < 1) {
+    result.push(array[Math.floor(Math.random() * array.length)]);
+  }
+  return result;
 };
 
-export const createGetId = () => {
-  let id = 1;
+export const createGetId = (startValue = 1) => {
+  let id = startValue;
   return () => id++;
 };
 
@@ -86,8 +92,20 @@ export const fillBy = (count, cb) => {
   return result;
 };
 
-export const padLeft = (idx) =>
-  `img/avatars/user${getRandomMyPositiveInteger(1, 7)}.png`;
-export const getAvatar = (idx) => `img/avatars/user${padLeft(idx)}.png`;
-export const getAvatar1 = (idx) => `photos/${id}.jng`;
-export const getAvatarUrl = (idx) => `img/avatar-${idx}.svg`;
+export const getRandomComment = () => {
+  const id = getCommmentId();
+  return {
+    id,
+    avatar: getAvatarUrl(getRandomFloat(1, 6, 0)),
+    message: "123",
+    name: "Murad",
+  };
+};
+
+export const getRandomComments = (count) => {
+  const comments = [];
+  for (let i = 0; i < count; i++) {
+    comments.push(getRandomComment());
+  }
+  return comments;
+};

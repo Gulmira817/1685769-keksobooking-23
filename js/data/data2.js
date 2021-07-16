@@ -1,54 +1,51 @@
-import { getRandomPositiveInteger } from "../utils/get-random-positive-integer.js";
-import { getRandomMyPositiveInteger } from "../utils/get-random-my-positive-integer.js";
 import {
   FEATURES,
   PHOTOS,
   TIME_SLOTS,
   TYPES,
   AVATAR_NUMBERS,
-} from "../constants";
+} from "../constants.js";
 import {
   createGetRandomItem,
+  getRandomItem,
   getRandomItems,
   getRandomPositiveInteger,
   getRandomFloat,
   getId,
-  getAvatarUrl,
-  padLeft,
+  fillBy,
+  getRandomComment,
 } from "../utils.js";
 
+const id = getId();
+const padLeft = (idx) => `${idx}`.padStart(2, 0);
+const getAvatar = (idx) => `img/avatars/user${padLeft(idx)}.png`;
+const getAvatar1 = (idx) => `photos/${id}.jpg`;
+const getAvatarUrl = (idx) => `img/avatar-${idx}.svg`;
+
 const createObject = () => {
-  const id = getId();
   const price = Math.floor(Math.random() * 5550);
   const countRooms = Math.ceil(Math.random() * 34);
   const countGuests = Math.ceil(Math.random() * 34);
   const lat = getRandomFloat(35.65, 35.7, 5);
   const lng = getRandomFloat(139.7, 139.8, 5);
   const typeIndex = getRandomPositiveInteger(0, 4);
-  const time = getRandomItem(TIME_SLOTS);
+  const time = getRandomItems(TIME_SLOTS);
   const feature = getRandomItem(FEATURES);
+  const photos = getRandomItem(PHOTOS);
+  const types = getRandomItem(TYPES);
   const getRandomAvatarIdx = createGetRandomItem(AVATAR_NUMBERS);
-
-  const getRandomComment = () => {
-    const id = getCommmentId();
-    return {
-      id,
-      avatar: getAvatarUrl(getRandomFloat(1, 6, 0)),
-      message: "123",
-      name: "Murad",
-    };
-  };
-
+  console.log("avatar" + getRandomAvatarIdx());
   return {
     author: {
-      id: getId(),
-      avatar: `img/avatars/user${padLeft(idx)}.png`,
+      id,
+      avatar: getAvatar(getRandomAvatarIdx()),
+      avatar1: getAvatar1(id),
     },
     offer: {
       title: "Квартира вашей мечты !",
       address: `${lat},${lng}`,
       price: price,
-      type: TYPES[typeIndex],
+      type: types,
       rooms: countRooms,
       guests: countGuests,
       checkin: time,
@@ -57,14 +54,13 @@ const createObject = () => {
       description:
         "Это очень тихое, уютное место, где будет царить покой и порядок.\n" +
         "Квартира очень большая и просторная,в ней большие окна,длинный балкон,гостиная с камином, фортепиано и аквариум",
-      photos: PHOTOS[Math.ceil(Math.random(0, photos.length - 1))],
+      photos: photos,
     },
     location: {
       lat: lat,
       lng: lng,
     },
-    comments: fillBy(getRandomFloat(3, 10), getRandomComment),
   };
 };
-// createObject()
+
 export { createObject };
