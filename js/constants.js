@@ -1,17 +1,17 @@
-export const TYPES = ["palace", "flat", "house", "bungalow", "hotel"];
-export const TIME_SLOTS = ["12:00", "13:00", "14:00"];
+export const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+export const TIME_SLOTS = ['12:00', '13:00', '14:00'];
 
 export const FEATURES = [
-  "wifi",
-  "dishwasher",
-  "parking",
-  "washer",
-  "elevator",
-  "conditioner",
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
 ];
 
 const PHOTOS_URL =
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking";
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking';
 
 export const PHOTOS = [
   `${PHOTOS_URL}/duonguyen-8LrGtIxxa4w.jpg`,
@@ -20,3 +20,5 @@ export const PHOTOS = [
 ];
 
 export const AVATAR_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export const LAT = [35.65000,35.70000];
+export const LNG = [139.70000,139.80000];

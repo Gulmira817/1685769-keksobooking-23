@@ -48,31 +48,31 @@ export const randomCompareItems = () => Math.floor(Math.random() * 30) - 10;
 
 export const createGetRandomItem = (data) => {
   const mixed = [...data].sort(randomCompareItems);
-  // const l = mixed.length;
   let idx = 0;
-  const getRandomItem = () => {
-    const result = mixed[idx % mixed.length];
-    idx = idx + 1;
+  const getRandomItem2= () => {
+    const result = mixed[idx++ % mixed.length];
     return result;
   };
-  return getRandomItem;
-  return () => console.log(mixed[i++ % l]);
+  return getRandomItem2;
 };
 
 export const getRandomFloat = (...args) => {
   const [min, max, pow] = [
     Math.min(args[0], args[1]),
     Math.max(args[0], args[1]),
-    Math.pow(10, args[2] ?? 0),
+    Math.pow(10, args[2]?? 0),
   ];
-  return Math.round((Math.random() * (max - min) + min) / pow) * pow;
+  return   Math.round((Math.random() * (max - min) + min) * pow) / pow;
 };
-export const getRandomBoolean = () => Math.random() >= 0.5;
+
+export const  getRandomBoolean = () => Math.random() >= 0.5;
 export const getRandomItem = (array) => array[getRandomFloat(0, array.length)];
+
+
 export const getRandomItems = (array, canBeEmpty = true) => {
   const result = array.filter(getRandomBoolean);
   if (!canBeEmpty && result.length < 1) {
-    result.push(array[Math.floor(Math.random() * array.length)]);
+    result.push(getRandomItem(array));
   }
   return result;
 };
@@ -84,28 +84,12 @@ export const createGetId = (startValue = 1) => {
 
 export const getId = createGetId();
 
-export const fillBy = (count, cb) => {
-  const result = [];
+export const fillBy = (count,cb) => {
+ const result = [];
   for (let i = 0; i < count; i++) {
     result.push(cb());
   }
   return result;
 };
 
-export const getRandomComment = () => {
-  const id = getCommmentId();
-  return {
-    id,
-    avatar: getAvatarUrl(getRandomFloat(1, 6, 0)),
-    message: "123",
-    name: "Murad",
-  };
-};
 
-export const getRandomComments = (count) => {
-  const comments = [];
-  for (let i = 0; i < count; i++) {
-    comments.push(getRandomComment());
-  }
-  return comments;
-};
