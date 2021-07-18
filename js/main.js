@@ -1,8 +1,7 @@
 
-import { getRandomAd } from './data/data.js';
-import { fillBy } from './utils.js';
+import { getAds } from './data.js';
+import { renderCard } from './card.js';
+const ad = getAds()
+const dd = ad[0]
+console.log(renderCard(dd))
 
-
-const ads = fillBy(4,getRandomAd);
-
-console.log(ads)
