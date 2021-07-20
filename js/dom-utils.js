@@ -38,7 +38,6 @@ const renderPhotos = (element, photos) => {
   return fragment;
 }
 
-
 const setOrRemove = (element, value, text) => {
   if (!value) {
     element.remove();
@@ -78,5 +77,5 @@ export {
   renderPhotos,
   setOrRemove,
   disableForms,
-  enableForms
+  enableForms,
 };
