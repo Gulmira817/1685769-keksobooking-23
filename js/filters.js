@@ -1,27 +1,39 @@
-const DEFAULT_SELECT_VALUES ={
-  type:'any',
-  price:'any',
-  rooms:'any',
-  guests:'any',
-}
+import { PRICE_FILTER_MIN, PRICE_FILTER_MAX } from './constants.js';
+const DEFAULT_FEATURE_VALUES = {
+  wifi: false,
+  dishwasher: false,
+  parking: false,
+  washer: false,
+  elevator: false,
+  conditioner: false,
+};
 
-const DEFAULT_FEATURE_VALUES ={
-  wifi:false,
-  dishwasher:false,
-  parking:false,
-  washer:false,
-  elevator:false,
-  conditioner:false
-}
+const DEFAULT_SELECT_VALUES = {
+  type: 'any',
+  price: 'any',
+  rooms: 'any',
+  guests: 'any',
+};
 
 let features = { ...DEFAULT_FEATURE_VALUES };
 let selectValues = { ...DEFAULT_SELECT_VALUES };
 
-const  setSelectValue=(name,value)=>{
-  selectValues[name]=value
-}
-const  setFeatureValue=(name,value)=>{
-  features[name]=value
+const priceValue = {
+  min: 'low',
+  middle: 'middle',
+  max: 'high',
+};
+
+const SELECT_KEYS = Object.keys(selectValues);
+const SELECT_KEY_ANY = 'any';
+const SELECT_VALUE_PRICE = 'price';
+
+const setSelectValue = (name, value) => {
+  selectValues[name] = value;
+};
+
+const setFeatureValue = (name, value) => {
+  features[name] = value;
 };
 
 const checkPrice = (value, price) => {
@@ -51,7 +63,8 @@ const checkPrice = (value, price) => {
   return true;
 };
 
-const filterAds = (ad) => {
+const filterAds= (ad) => {
+
   for (const key of SELECT_KEYS) {
     const value = selectValues[key];
 
@@ -77,10 +90,10 @@ const filterAds = (ad) => {
 
   return true;
 };
+
 const resetFilterValues = () => {
   features = { ...DEFAULT_FEATURE_VALUES };
   selectValues = { ...DEFAULT_SELECT_VALUES };
 };
 
-
-export {filterAds,setSelectValue,setFeatureValue,resetFilterValues}
+export { filterAds, setFeatureValue, setSelectValue, resetFilterValues };

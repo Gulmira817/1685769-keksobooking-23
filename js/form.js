@@ -2,7 +2,9 @@ import { validateHeader, validatePrice, PriceValue, HeaderLength } from './valid
 import { LIMIT_MIN_PRICE, SAVE_URL } from './constants.js'
 import { setFeatureValue, setSelectValue, filterAds, resetFilterValues } from './filters.js';
 import { saveData } from './api.js'
-import { removePins } from './map.js'
+import { removePins,addPins } from './map.js'
+import { prepareData,getData } from './store.js'
+import { renderCard } from './card.js';
 
 const FORM = document.querySelector('.ad-form')
 const HEADER = FORM.querySelector('#title')
