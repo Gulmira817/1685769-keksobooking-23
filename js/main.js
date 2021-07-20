@@ -1,11 +1,11 @@
 import { loadData } from './api.js';
 import { DATA_URL } from './constants.js';
 import { getData,storeData ,prepareData} from './store.js';
-import { getAds } from './data.js';
 import { renderCard } from './card.js';
-import { validateForm ,addValidators} from './form.js';
+import { validateForm ,addEventListener} from './form.js';
 import { disableForms, enableForms } from './dom-utils.js';
 import { PIN_MAIN_MARKER, initMap, addAddress, addPins } from './map.js';
+import { filterAds } from './filters.js';
 
 const onDataLoad=(ads)=>{
   storeData(ads)
@@ -16,8 +16,8 @@ const onDataLoad=(ads)=>{
  const onMapSuccess = () => {
   enableForms();
   addAddress(PIN_MAIN_MARKER);
-  addValidators()
+  addEventListener()
   loadData(DATA_URL,onDataLoad,console.error)
  };
-
+ disableForms()
 initMap(onMapSuccess);

@@ -8,6 +8,7 @@ const PRICE_MAX = 1000000;
 const LIMIT_SINGS = 5;
 
 const DATA_URL = 'https://23.javascript.pages.academy/keksobooking/data';
+const SAVE_URL = 'https://23.javascript.pages.academy/keksobooking';
 
 const PHOTOS_URL =
   "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking";
@@ -91,5 +92,6 @@ export {
   GUESTS,
   ROOMS,
   LIMIT_MIN_PRICE,
-  DATA_URL
+  DATA_URL,
+  SAVE_URL
 };

@@ -11,4 +11,24 @@ const loadData = (url,onSuccess,onError)=>{
     onError(error)
   });
 };
- export {loadData}
+
+const saveData = (url, body, onSuccess, onError) => {
+  fetch(url, {
+    method: 'POST',
+    body,
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Данные не удалось отправить.');
+    })
+    .then(() => {
+      onSuccess();
+    })
+    .catch((error) => {
+      onError(error);
+    });
+};
+
+ export {loadData,saveData}
