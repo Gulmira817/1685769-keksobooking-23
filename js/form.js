@@ -74,16 +74,18 @@ const handleLimitPrice = () => {
 const handleRoomsCapacityChange = () => {
   const rooms = Number(ROOM_NUMBER.value)
   const count = Number(CAPACITY.value)
+  console.log('rooms' + rooms)
+  console.log('count' + count)
   let message = '';
   if (rooms === 100) {
     if (count !== 0) {
       message = '100 комнат не для гостей.'
-    } else {
-      if (count === 0 || rooms < count) {
-        message = 'Гостей должно быть меньше или равно количеству комнат.'
-      }
     }
   }
+  else if (count === 0 || rooms < count) {
+    message = 'Гостей должно быть меньше или равно количеству комнат.'
+  }
+  console.log('message' + message)
   CAPACITY.setCustomValidity(message);
   CAPACITY.reportValidity();
 }
