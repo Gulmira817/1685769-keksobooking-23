@@ -6,6 +6,9 @@ const GUESTS_MAX = 3;
 const NUMBER_OBJECTS = 10;
 const PRICE_MAX = 1000000;
 const LIMIT_SINGS = 5;
+
+const DATA_URL = 'https://23.javascript.pages.academy/keksobooking/data';
+
 const PHOTOS_URL =
   "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking";
 
@@ -33,11 +36,13 @@ const PHOTOS = [
   `${PHOTOS_URL}/brandon-hoogenboom-SNxQGWxZQi0.jpg`,
   `${PHOTOS_URL}/claire-rendall-b6kAwr1i0Iw.jpg`,
 ];
+
 const DESCRIPTIONS = [
   "Очень тихое, уютное место , где будет царить покой и порядок",
   "Квартира очень большая и просторная с камином, фортепиано и аквариум",
   "Находиться в центре города,рядом удобный транспорт",
 ];
+
 const Location = {
   LAT_MIN: 35.65,
   LAT_MAX: 35.7,
@@ -85,5 +90,6 @@ export {
   AD_TYPES,
   GUESTS,
   ROOMS,
-  LIMIT_MIN_PRICE
+  LIMIT_MIN_PRICE,
+  DATA_URL
 };

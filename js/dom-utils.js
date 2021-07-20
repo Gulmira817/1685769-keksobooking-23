@@ -10,14 +10,15 @@ const FORMS = [
   {
     element: MAP_FILTERS,
     disabledClass: 'map__filters--disabled',
-    selector: 'select,fieldset'
+    selector: 'select,  fieldset'
   }
 ]
 
 const removeExtraFeatures = (elements, features) => {
   elements.forEach((element) => {
+
     const classes = element.classList[1].split('--');
-    if (!features.includes(classes[1])) {
+    if (!features|| !features.includes(classes[1])) {
       element.remove();
     }
   });
@@ -25,9 +26,11 @@ const removeExtraFeatures = (elements, features) => {
 
 const renderPhotos = (element, photos) => {
   const fragment = document.createDocumentFragment();
+  if(!photos){
+     return fragment
+  }
   photos.forEach((photoUrl) => {
     const photoElement = element.cloneNode(true);
-
     photoElement.src = photoUrl;
     fragment.appendChild(photoElement)
   });
@@ -50,7 +53,7 @@ const switchForm = (forms, className, selector, enable) => {
   } else {
     forms.classList.add(className)
   }
-  const controls = form.querySelectorAll(selector)
+  const controls = forms.querySelectorAll(selector)
   controls.forEach((control) => {
     if (enable) {
       control.removeAttribute('disabled')
@@ -66,6 +69,7 @@ const switchForms = (enable) => {
 
   })
 }
+
 const disableForms = () => switchForms(false)
 const enableForms = () => switchForms(true)
 

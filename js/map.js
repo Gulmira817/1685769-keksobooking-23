@@ -1,15 +1,14 @@
-import { FORM } from './form.js';
 import { LIMIT_SINGS } from './constants.js';
+import { FORM, ADDRESS } from './form.js';
 
 const markers = [];
 
-const START_POSITION = {
+const StartPosition = {
   LAT: 35.68378,
   LNG: 139.75423,
 };
 
 const START_MAP_SKALE = 12;
-const ADDRESS = FORM.querySelector('#address');
 
 const PIN_IMG = L.icon({
   iconUrl: 'img/main-pin.svg',
@@ -25,8 +24,8 @@ const PIN = L.icon({
 
 const PIN_MAIN_MARKER = L.marker(
   {
-    lat: START_POSITION.LAT,
-    lng: START_POSITION.LNG,
+    lat: StartPosition.LAT,
+    lng: StartPosition.LNG,
   },
   {
     draggable: true,
@@ -43,10 +42,9 @@ const MAP = L.map('map-canvas');
 
 const initMap = (onLoadSuccess) => {
   MAP.on('load', onLoadSuccess);
-
   MAP.setView({
-    lat: START_POSITION.LAT,
-    lng: START_POSITION.LNG,
+    lat: StartPosition.LAT,
+    lng: StartPosition.LNG,
   }, START_MAP_SKALE);
 
   L.tileLayer(
@@ -63,8 +61,9 @@ const initMap = (onLoadSuccess) => {
   });
 };
 
-const addPins = (points, card) => {
-  points.forEach((point) => {
+const addPins = (data, renderCard) => {
+
+  data.forEach((point) => {
     const Marker = L.marker(
       {
         lat: point.location.lat,
@@ -75,7 +74,7 @@ const addPins = (points, card) => {
       });
 
     Marker.addTo(MAP);
-    Marker.bindPopup(card(point),
+    Marker.bindPopup(renderCard(point),
       {
         keepInView: true,
       },
@@ -85,20 +84,20 @@ const addPins = (points, card) => {
 };
 
 const resetAddress = () => {
-  ADDRESS.value = `${START_POSITION.LAT}, ${START_POSITION.LNG}`;
+  ADDRESS.value = `${StartPosition.LAT}, ${StartPosition.LNG}`;
 };
 
 const setInitialStateMap = () => {
   const balun = document.querySelector('.leaflet-popup');
 
   PIN_MAIN_MARKER.setLatLng({
-    lat: START_POSITION.LAT,
-    lng: START_POSITION.LNG,
+    lat: StartPosition.LAT,
+    lng: StartPosition.LNG,
   });
 
   MAP.setView({
-    lat: START_POSITION.LAT,
-    lng: START_POSITION.LNG,
+    lat: StartPosition.LAT,
+    lng: StartPosition.LNG,
   }, START_MAP_SKALE);
 
   if (balun) {
