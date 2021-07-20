@@ -14,6 +14,7 @@ import {
   TITLES,
   PHOTOS,
 } from "./constants.js";
+
 import {
   getRandomFloat,
   getRandomNumber,
