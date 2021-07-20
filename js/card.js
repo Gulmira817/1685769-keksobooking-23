@@ -39,7 +39,7 @@ const renderCard = (ad) => {
   removeExtraFeatures(features, offer.features)
   photosContainer.appendChild(renderPhotos(photoElement, offer.photos));
   MAP_CANVAS_ELEMENT.appendChild(card)
-  // return card;
+  return card;
 
 }
 export { renderCard }
