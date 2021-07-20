@@ -7,6 +7,8 @@ const PRICE = FORM.querySelector('#price')
 const ROOM_NUMBER = FORM.querySelector('#room_number')
 const CAPACITY = FORM.querySelector('#capacity')
 const TYPE = FORM.querySelector('#type')
+const TIME_IN = FORM.querySelector('#timein')
+const TIME_OUT = FORM.querySelector('#timeout')
 
 const prepareHeader = () => {
   HEADER.setAttribute('required', true)
@@ -29,6 +31,13 @@ const prepareForms = () => {
   prepareHeader();
   prepareAddresss();
   preparePrice();
+};
+
+
+const handleTimeChange = (evt) => {
+  const value = evt.target.value
+  TIME_IN.value = value
+  TIME_OUT.value=value
 };
 
 //------------------------------------------------------------------------------
@@ -77,6 +86,8 @@ const addValidators = () => {
   PRICE.addEventListener('input', handlePriceChange)
   ROOM_NUMBER.addEventListener('input', handleRoomsCapacityChange)
   CAPACITY.addEventListener('input', handleRoomsCapacityChange)
+  TIME_OUT.addEventListener('change', handleTimeChange)
+  TIME_IN.addEventListener('change', handleTimeChange)
 }
 
 const validateForm = (form) => {

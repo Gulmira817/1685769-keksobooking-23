@@ -9,22 +9,19 @@ import { disableForms, enableForms } from './dom-utils.js';
 import { PIN_MAIN_MARKER, initMap, addAddress, addPins } from './map.js';
 const data = getAds()
 
-// addValidators()
-// validateForm()
+addValidators()
+validateForm()
 // enableForms();
 
 const onDataLoad=(ads)=>{
   storeData(ads)
-  // prepareData()
-  addPinArr(getData(),renderAd)
+  prepareData()
 }
  const onMapSuccess = () => {
-  //  activeForms()
+
   addAddress(PIN_MAIN_MARKER);
   addPins(data,renderCard)
-  // loadData(DATA_URL, onDataLoad, onError);
-  // addValidators(debounce((renderPins), TIMEOUT_DELAY));
-  loadData(DATA_URL,onDataLoad,console.error)
+
 
  };
 initMap(onMapSuccess);
