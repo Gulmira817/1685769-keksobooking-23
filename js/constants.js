@@ -6,6 +6,9 @@ const GUESTS_MAX = 3;
 const NUMBER_OBJECTS = 10;
 const PRICE_MAX = 1000000;
 const LIMIT_SINGS = 5;
+
+const DATA_URL = 'https://23.javascript.pages.academy/keksobooking/data';
+
 const PHOTOS_URL =
   "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking";
 
@@ -87,5 +90,6 @@ export {
   AD_TYPES,
   GUESTS,
   ROOMS,
-  LIMIT_MIN_PRICE
+  LIMIT_MIN_PRICE,
+  DATA_URL
 };

@@ -62,6 +62,7 @@ const initMap = (onLoadSuccess) => {
 };
 
 const addPins = (data, renderCard) => {
+
   data.forEach((point) => {
     const Marker = L.marker(
       {

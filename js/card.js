@@ -7,9 +7,7 @@ const MAP_CANVAS_ELEMENT = MAP_ELEMENT.querySelector('#map-canvas')
 
 const renderCard = (ad) => {
   const { offer, author } = ad
-  console.log("offer")
-  console.log(offer)
-  const card = CARD_TEMPLATE.cloneNode(true)
+  const card = CARD_TEMPLATE.content.cloneNode(true)
   const title = card.querySelector('.popup__title')
   const address = card.querySelector('.popup__text--address')
   const price = card.querySelector('.popup__text--price')
@@ -38,7 +36,6 @@ const renderCard = (ad) => {
   }
   removeExtraFeatures(features, offer.features)
   photosContainer.appendChild(renderPhotos(photoElement, offer.photos));
-  MAP_CANVAS_ELEMENT.appendChild(card)
   return card;
 
 }

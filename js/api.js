@@ -1,4 +1,3 @@
-const  URL='';
 const loadData = (url,onSuccess,onError)=>{
   const dataPromise = fetch(url);
   dataPromise.then((response)=>{

@@ -93,7 +93,6 @@ const pluralize = (count, plurals) => plurals[getPluralIdx(count)]
 const getPlural = (count, plurals) => `${count} ${pluralize(count, plurals)}`
 const createArrayRandom = (items) => items.filter(getRandomBoolean)
 
-
 const fillBy = (count, cb) => {
   const result = [];
   for (let i = 0; i < count; i++) {
@@ -102,8 +101,8 @@ const fillBy = (count, cb) => {
   return result;
 };
 
-
 const isFunction =(arg)=>typeof arg ==='function'
+
 export {
   fillBy,
   getRandomPositiveInteger,
