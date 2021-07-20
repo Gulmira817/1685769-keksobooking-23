@@ -85,7 +85,6 @@ const handleRoomsCapacityChange = () => {
   else if (count === 0 || rooms < count) {
     message = 'Гостей должно быть меньше или равно количеству комнат.'
   }
-  console.log('message' + message)
   CAPACITY.setCustomValidity(message);
   CAPACITY.reportValidity();
 }

@@ -33,11 +33,13 @@ const PHOTOS = [
   `${PHOTOS_URL}/brandon-hoogenboom-SNxQGWxZQi0.jpg`,
   `${PHOTOS_URL}/claire-rendall-b6kAwr1i0Iw.jpg`,
 ];
+
 const DESCRIPTIONS = [
   "Очень тихое, уютное место , где будет царить покой и порядок",
   "Квартира очень большая и просторная с камином, фортепиано и аквариум",
   "Находиться в центре города,рядом удобный транспорт",
 ];
+
 const Location = {
   LAT_MIN: 35.65,
   LAT_MAX: 35.7,
