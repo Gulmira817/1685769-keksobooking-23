@@ -1,4 +1,5 @@
 import { validateHeader, validatePrice, PriceValue, HeaderLength } from './validate.js'
+import { LIMIT_MIN_PRICE } from './constants.js'
 
 const FORM = document.querySelector('.ad-form')
 const HEADER = FORM.querySelector('#title')
@@ -6,6 +7,7 @@ const ADDRESS = FORM.querySelector('#address')
 const PRICE = FORM.querySelector('#price')
 const ROOM_NUMBER = FORM.querySelector('#room_number')
 const CAPACITY = FORM.querySelector('#capacity')
+const TYPE = FORM.querySelector('#type')
 
 const prepareHeader = () => {
   HEADER.setAttribute('required', true)
@@ -55,6 +57,11 @@ const handlePriceChange = (evt) => {
   element.reportValidity();
 }
 
+const handleLimitPrice = () => {
+  PRICE.value = LIMIT_MIN_PRICE[TYPE.value];
+  PriceValue.MIN = LIMIT_MIN_PRICE[TYPE.value];
+};
+
 const handleRoomsCapacityChange = () => {
   const rooms = Number(ROOM_NUMBER.value)
   const count = Number(CAPACITY.value)
@@ -76,6 +83,7 @@ const addValidators = () => {
   PRICE.addEventListener('input', handlePriceChange)
   ROOM_NUMBER.addEventListener('input', handleRoomsCapacityChange)
   CAPACITY.addEventListener('input', handleRoomsCapacityChange)
+  TYPE.addEventListener('change', handleLimitPrice);
 }
 
 const validateForm = (form) => {

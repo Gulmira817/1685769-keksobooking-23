@@ -8,14 +8,17 @@ const PRICE_MAX = 1000000;
 const LIMIT_SINGS = 5;
 const PHOTOS_URL =
   "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking";
+
 const TITLES = [
   "Квартира вашей мечты",
   "Уютная квартира",
   "Квартира  студия",
   "Смарт квартира ",
 ];
+
 const TYPES = ["palace", "flat", "house", "bungalow", "hotel"];
 const TIME_SLOTS = ["12:00", "13:00", "14:00"];
+
 const FEATURES = [
   "wifi",
   "dishwasher",
@@ -24,6 +27,7 @@ const FEATURES = [
   "elevator",
   "conditioner",
 ];
+
 const PHOTOS = [
   `${PHOTOS_URL}/duonguyen-8LrGtIxxa4w.jpg`,
   `${PHOTOS_URL}/brandon-hoogenboom-SNxQGWxZQi0.jpg`,
@@ -48,7 +52,15 @@ const AD_TYPES = {
   house: 'Дом',
   palace: 'Дворец',
   hotel: 'Отель ',
-}
+};
+
+const LIMIT_MIN_PRICE = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
 
 const GUESTS = ["гостя", "гостей", "гостей"]
 const ROOMS = ["комната", "комнаты", "комнат"]
@@ -72,5 +84,6 @@ export {
   PHOTOS,
   AD_TYPES,
   GUESTS,
-  ROOMS
+  ROOMS,
+  LIMIT_MIN_PRICE
 };
