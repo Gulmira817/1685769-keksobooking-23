@@ -1,4 +1,5 @@
 import { validateHeader, validatePrice, PriceValue, HeaderLength } from './validate.js'
+import {LIMIT_MIN_PRICE } from './constants.js'
 
 const FORM = document.querySelector('.ad-form')
 const HEADER = FORM.querySelector('#title')
@@ -65,18 +66,26 @@ const handlePriceChange = (evt) => {
   element.reportValidity();
 }
 
+const handleLimitPrice = () => {
+  PRICE.value = LIMIT_MIN_PRICE[TYPE.value];
+  PriceValue.MIN = LIMIT_MIN_PRICE[TYPE.value];
+};
+
 const handleRoomsCapacityChange = () => {
   const rooms = Number(ROOM_NUMBER.value)
   const count = Number(CAPACITY.value)
+  console.log('rooms' + rooms)
+  console.log('count' + count)
   let message = '';
   if (rooms === 100) {
     if (count !== 0) {
       message = '100 комнат не для гостей.'
     }
   }
-   if (count === 0 || rooms < count) {
+  else if (count === 0 || rooms < count) {
     message = 'Гостей должно быть меньше или равно количеству комнат.'
   }
+  console.log('message' + message)
   CAPACITY.setCustomValidity(message);
   CAPACITY.reportValidity();
 }
@@ -85,6 +94,7 @@ const addValidators = () => {
   PRICE.addEventListener('input', handlePriceChange)
   ROOM_NUMBER.addEventListener('input', handleRoomsCapacityChange)
   CAPACITY.addEventListener('input', handleRoomsCapacityChange)
+  TYPE.addEventListener('change', handleLimitPrice);
   TIME_OUT.addEventListener('change', handleTimeChange)
   TIME_IN.addEventListener('change', handleTimeChange)
 }
