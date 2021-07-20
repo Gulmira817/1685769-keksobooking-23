@@ -10,7 +10,7 @@ const FORMS = [
   {
     element: MAP_FILTERS,
     disabledClass: 'map__filters--disabled',
-    selector: 'select,fieldset'
+    selector: 'select,  fieldset'
   }
 ]
 
@@ -50,7 +50,7 @@ const switchForm = (forms, className, selector, enable) => {
   } else {
     forms.classList.add(className)
   }
-  const controls = form.querySelectorAll(selector)
+  const controls = forms.querySelectorAll(selector)
   controls.forEach((control) => {
     if (enable) {
       control.removeAttribute('disabled')
@@ -66,6 +66,7 @@ const switchForms = (enable) => {
 
   })
 }
+
 const disableForms = () => switchForms(false)
 const enableForms = () => switchForms(true)
 

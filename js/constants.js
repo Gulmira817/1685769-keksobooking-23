@@ -8,6 +8,7 @@ const PRICE_MAX = 1000000;
 const LIMIT_SINGS = 5;
 const PHOTOS_URL =
   "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking";
+const DATA_URL = 'https://23.javascript.pages.academy/keksobooking/data'
 const TITLES = [
   "Квартира вашей мечты",
   "Уютная квартира",
@@ -72,5 +73,6 @@ export {
   PHOTOS,
   AD_TYPES,
   GUESTS,
-  ROOMS
+  ROOMS,
+  DATA_URL
 };

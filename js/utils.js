@@ -102,6 +102,8 @@ const fillBy = (count, cb) => {
   return result;
 };
 
+
+const isFunction =(arg)=>typeof arg ==='function'
 export {
   fillBy,
   getRandomPositiveInteger,
@@ -116,18 +118,5 @@ export {
   getRandomItem,
   createArrayRandom,
   getPlural,
+  isFunction
 };
-// export const getRandomItems = (array, canBeEmpty = true) => {
-//   const result = array.filter(getRandomBoolean);
-//   if (!canBeEmpty && result.length < 1) {
-//     result.push(getRandomItem(array));
-//   }
-//   return result;
-// };
-
-// export const createGetId = (startValue = 1) => {
-//   let id = startValue;
-//   return () => id++;
-// };
-
-// export const getId = createGetId();

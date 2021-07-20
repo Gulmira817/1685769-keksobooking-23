@@ -6,6 +6,7 @@ const ADDRESS = FORM.querySelector('#address')
 const PRICE = FORM.querySelector('#price')
 const ROOM_NUMBER = FORM.querySelector('#room_number')
 const CAPACITY = FORM.querySelector('#capacity')
+const TYPE = FORM.querySelector('#type')
 
 const prepareHeader = () => {
   HEADER.setAttribute('required', true)
@@ -83,4 +84,4 @@ const validateForm = (form) => {
 
 
 prepareForms();
-export { validateForm, addValidators }
+export { validateForm, addValidators,FORM,ADDRESS }
