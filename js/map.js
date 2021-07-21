@@ -1,13 +1,15 @@
-import {ADDRESS ,LIMIT_SINGS,MAP_FILTERS} from './constants.js';
-
-const markers = [];
+// eslint-disable-next-line no-redeclare
+/* global L:readonly */
+import {
+  FORM,
+  ACCURACY,
+  START_MAP_SKALE
+} from './constants.js';
 
 const StartPosition = {
   LAT: 35.68378,
   LNG: 139.75423,
 };
-
-const START_MAP_SKALE = 12;
 
 const PIN_IMG = L.icon({
   iconUrl: 'img/main-pin.svg',
@@ -21,7 +23,25 @@ const PIN = L.icon({
   iconAnchor: [20, 40],
 });
 
-const PIN_MAIN_MARKER = L.marker(
+const ADDRESS = FORM.querySelector('#address');
+const MAP = L.map('map-canvas');
+
+const initMap  = (callback) => {
+  MAP.on('load', callback)
+    .setView({
+      lat: StartPosition.LAT,
+      lng: StartPosition.LNG,
+    }, START_MAP_SKALE);
+
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(MAP);
+};
+
+const PIN_MAIN_MARKER  = L.marker(
   {
     lat: StartPosition.LAT,
     lng: StartPosition.LNG,
@@ -33,63 +53,23 @@ const PIN_MAIN_MARKER = L.marker(
 );
 
 const addAddress = (markerName) => {
-  const pinPositions = markerName.getLatLng();
-  ADDRESS.value = `${(pinPositions.lat).toFixed(LIMIT_SINGS)}, ${(pinPositions.lng).toFixed(LIMIT_SINGS)}`;
+  const pinCoords = markerName.getLatLng();
+  ADDRESS.value = `${(pinCoords.lat).toFixed(ACCURACY)}, ${(pinCoords.lng).toFixed(ACCURACY)}`;
 };
 
-const MAP = L.map('map-canvas');
-
-const initMap = (onLoadSuccess) => {
-  MAP.on('load', onLoadSuccess);
-  MAP.setView({
-    lat: StartPosition.LAT,
-    lng: StartPosition.LNG,
-  }, START_MAP_SKALE);
-
-  L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    },
-  ).addTo(MAP);
-
-  PIN_MAIN_MARKER.addTo(MAP);
-
-  PIN_MAIN_MARKER.on('moveend', (evt) => {
-    addAddress(evt.target);
-  });
+const resetPopup = () => {
+  const popap = document.querySelector('.leaflet-popup');
+  if (popap) {
+    popap.remove();
+  }
 };
 
-const addPins = (data, renderCard) => {
-
-  data.forEach((point) => {
-    const Marker = L.marker(
-      {
-        lat: point.location.lat,
-        lng: point.location.lng,
-      },
-      {
-        PIN,
-      });
-
-    Marker.addTo(MAP);
-    Marker.bindPopup(renderCard(point),
-      {
-        keepInView: true,
-      },
-    );
-    markers.push(Marker);
-  });
-};
-
-const resetAddress = () => {
+const addAddressValue = () => {
   ADDRESS.value = `${StartPosition.LAT}, ${StartPosition.LNG}`;
 };
 
-const setInitialStateMap = () => {
-  const balun = document.querySelector('.leaflet-popup');
-
-  PIN_MAIN_MARKER.setLatLng({
+const resetMap = () => {
+  PIN_MAIN_MARKER .setLatLng({
     lat: StartPosition.LAT,
     lng: StartPosition.LNG,
   });
@@ -97,23 +77,52 @@ const setInitialStateMap = () => {
   MAP.setView({
     lat: StartPosition.LAT,
     lng: StartPosition.LNG,
-  }, START_MAP_SKALE);
+  },START_MAP_SKALE);
 
-  if (balun) {
-    balun.remove();
-  }
-  resetAddress();
+  resetPopup();
+  addAddressValue();
+};
+
+const markers = [];
+
+const addPins = (points, getCart) => {
+  points.forEach((point) => {
+    const { lat, lng } = point.location;
+    const markerPin = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon: PIN,
+      });
+
+    markerPin
+      .addTo(MAP)
+      .bindPopup(getCart(point),
+        {
+          keepInView: true,
+        },
+      );
+    markers.push(markerPin);
+  });
 };
 
 const removePins = () => {
-  markers.forEach((marker) => MAP.removeLayer(marker));
+  markers.forEach((marker) => marker.remove());
 };
 
+PIN_MAIN_MARKER .addTo(MAP);
+
+PIN_MAIN_MARKER .on('moveend', (evt) => {
+  addAddress(evt.target);
+});
+
 export {
-  PIN_MAIN_MARKER,
-  initMap,
+  PIN_MAIN_MARKER ,
+  initMap ,
   addAddress,
   addPins,
-  setInitialStateMap,
+  resetMap,
   removePins
 };

@@ -21,6 +21,8 @@ import {
   setSelectValue
 } from './filters.js';
 
+import { resetImages } from './avatar.js';
+
 const onTitleCheck = () => {
   const valueLength = HEADER.value.length;
   if (valueLength < NameLength.MIN) {
@@ -100,6 +102,7 @@ const getOnFilterChange = (onChange) => (evt) => {
 };
 
 const resetForm = () => {
+  resetImages();
   HEADER.value = '';
   DESCRIPTION.value = '';
   PRICE.value = '';
