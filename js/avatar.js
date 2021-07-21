@@ -1,59 +1,60 @@
-import {
-  FORM,
-  PREVIEW
-} from './constants.js';
+import { FORM } from './constants.js';
 
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const PREVIEW_AVATAR = FORM.querySelector('.ad-form-header__preview img');
+const AVATAR_IMG = FORM.querySelector('.ad-form-header__input');
+const HOUSING_IMG = FORM.querySelector('.ad-form__input');
+const PREVIEW_HOUSING = FORM.querySelector('.ad-form__photo');
+const URL_IMG_AVATAR = 'img/muffin-grey.svg';
 
-const FILD_AVATAR = FORM.querySelector('.ad-form-header__input');
-const FILD_HOUSING = FORM.querySelector('.ad-form__input');
-const IMAGES_PREVIEW = FORM.querySelector('.ad-form__photo');
+const ImageType = {
+  housing: PREVIEW_HOUSING,
+  avatar: PREVIEW_AVATAR,
+};
 
-const downloadFotoUser = () => {
-  const file = FILD_AVATAR.files[0];
+const FILE_TYPES = ['jpeg', 'png', 'gif', 'jpg'];
+
+const unloadPreview = (input, type) => {
+  const file = input.files[0];
   const fileName = file.name.toLowerCase();
-
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
     const reader = new FileReader();
 
     reader.addEventListener('load', () => {
-      PREVIEW.src = reader.result;
+
+      if (type === ImageType.housing) {
+        ImageType.housing.style.backgroundImage = `url(${reader.result})`;
+        ImageType.housing.style.backgroundSize = '70px 70px';
+      }
+      else {
+        ImageType.avatar.src = reader.result;
+      }
+
     });
 
     reader.readAsDataURL(file);
   }
 };
 
-const downloadFotoHousing = () => {
-  const file = FILD_HOUSING.files[0];
-  const fileName = file.name.toLowerCase();
-
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-
-  if (matches) {
-    const reader = new FileReader();
-
-    reader.addEventListener('load', () => {
-      IMAGES_PREVIEW.style.backgroundImage = `url(${reader.result})`;
-      IMAGES_PREVIEW.style.backgroundSize = '70px 70px';
-    });
-
-    reader.readAsDataURL(file);
-  }
+const showtPrewiewHousing = () => {
+  unloadPreview(HOUSING_IMG, ImageType.housing);
 };
 
-const resetImage = () => {
-  IMAGES_PREVIEW.style = '';
+const showPrewiewAvatar = () => {
+  unloadPreview(AVATAR_IMG, ImageType.avatar);
 };
 
-const addEventListenerFotos = () => {
-  FILD_AVATAR.addEventListener('change', downloadFotoUser);
-  FILD_HOUSING.addEventListener('change', downloadFotoHousing);
+const resetImages = () => {
+  ImageType.housing.style = '';
+  ImageType.avatar.src = URL_IMG_AVATAR;
+  AVATAR_IMG.value = '';
+  HOUSING_IMG.value = '';
 };
 
-export {
-  addEventListenerFotos,
-  resetImage
+const addEventListenersImages = () => {
+  HOUSING_IMG.addEventListener('change', showtPrewiewHousing);
+  AVATAR_IMG.addEventListener('change', showPrewiewAvatar);
 };
+
+export { resetImages, addEventListenersImages };

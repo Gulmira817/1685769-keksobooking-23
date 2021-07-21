@@ -10,7 +10,7 @@ const LIMIT_SINGS = 5;
 const PRICE_FILTER_MIN = 10000;
 const PRICE_FILTER_MAX = 50000;
 const RERENDER_DELAY = 500;
-
+const ACCURACY = 5;
 const FORM = document.querySelector('.ad-form')
 const HEADER = FORM.querySelector('#title')
 const ADDRESS = FORM.querySelector('#address')
@@ -32,7 +32,7 @@ const HOUSING_GUESTS = MAP_FILTERS.querySelector('#housing-guests');
 const CHECKBOXES = document.querySelectorAll('input[type=checkbox]');
 const PREVIEW = FORM.querySelector('.ad-form-header__preview img');
 const BUTTON_RESET = FORM.querySelector('.ad-form__reset');
-
+const START_MAP_SKALE = 12;
 const DATA_URL = 'https://23.javascript.pages.academy/keksobooking/data';
 const SAVE_URL = 'https://23.javascript.pages.academy/keksobooking';
 
@@ -150,5 +150,7 @@ export {
   PREVIEW,
   NameLength,
   RERENDER_DELAY,
+  START_MAP_SKALE,
+   ACCURACY,
   BUTTON_RESET
 };
