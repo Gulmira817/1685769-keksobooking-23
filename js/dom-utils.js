@@ -38,6 +38,19 @@ const renderPhotos = (element, photos) => {
   return fragment;
 }
 
+const fillPhotoOrDelete = (photos, block, element) => {
+  if (!photos || photos.length === 0) {
+    element.remove();
+  } else {
+    photos.forEach((photo) => {
+      const clonePhoto = element.cloneNode(true);
+      clonePhoto.src = photo;
+      block.appendChild(clonePhoto);
+    });
+    element.remove();
+  }
+};
+
 const setOrRemove = (element, value, text) => {
   if (!value) {
     element.remove();
@@ -78,4 +91,5 @@ export {
   setOrRemove,
   disableForms,
   enableForms,
+  fillPhotoOrDelete,
 };

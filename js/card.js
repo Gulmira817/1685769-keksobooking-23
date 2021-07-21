@@ -1,5 +1,5 @@
 import { AD_TYPES, GUESTS, ROOMS } from './constants.js'
-import { setOrRemove, removeExtraFeatures, renderPhotos } from './dom-utils.js'
+import { setOrRemove, removeExtraFeatures, renderPhotos,fillPhotoOrDelete} from './dom-utils.js'
 import { getPlural } from './utils.js'
 const CARD_TEMPLATE = document.querySelector('#card')
 const MAP_ELEMENT = document.querySelector('.map')
@@ -35,7 +35,10 @@ const renderCard = (ad) => {
     avatar.remove()
   }
   removeExtraFeatures(features, offer.features)
-  photosContainer.appendChild(renderPhotos(photoElement, offer.photos));
+  // photosContainer.appendChild(renderPhotos(photoElement, offer.photos));
+
+
+  fillPhotoOrDelete(offer.photos, photosContainer, photoElement);
   return card;
 
 }
