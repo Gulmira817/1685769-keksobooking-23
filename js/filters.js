@@ -1,5 +1,20 @@
-import { PRICE_FILTER_MIN, PRICE_FILTER_MAX } from './constants.js';
-const DEFAULT_FEATURE_VALUES = {
+import {
+  HOUSING_TYPE,
+  HOUSING_PRICE,
+  HOUSING_ROOMS,
+  HOUSING_GUESTS,
+  PRICE_FILTER_MIN,
+  PRICE_FILTER_MAX
+} from './constants.js';
+
+const selectValues = {
+  type: 'any',
+  price: 'any',
+  rooms: 'any',
+  guests: 'any',
+};
+
+const features = {
   wifi: false,
   dishwasher: false,
   parking: false,
@@ -8,25 +23,14 @@ const DEFAULT_FEATURE_VALUES = {
   conditioner: false,
 };
 
-const DEFAULT_SELECT_VALUES = {
-  type: 'any',
-  price: 'any',
-  rooms: 'any',
-  guests: 'any',
-};
-
-let features = { ...DEFAULT_FEATURE_VALUES };
-let selectValues = { ...DEFAULT_SELECT_VALUES };
-
-const priceValue = {
+const valuePrice = {
   min: 'low',
   middle: 'middle',
   max: 'high',
 };
 
-const SELECT_KEYS = Object.keys(selectValues);
-const SELECT_KEY_ANY = 'any';
-const SELECT_VALUE_PRICE = 'price';
+const SELECTOR_KEYS = Object.keys(selectValues);
+const FEATURE_KEYS = Object.keys(features);
 
 const setSelectValue = (name, value) => {
   selectValues[name] = value;
@@ -38,51 +42,49 @@ const setFeatureValue = (name, value) => {
 
 const checkPrice = (value, price) => {
   switch (value) {
-    case priceValue.min:
+    case valuePrice.min:
       if (price > PRICE_FILTER_MIN) {
         return false;
       }
 
       break;
 
-    case priceValue.middle:
+    case valuePrice.middle:
       if (price < PRICE_FILTER_MIN || price >= PRICE_FILTER_MAX) {
         return false;
       }
 
       break;
 
-    case priceValue.max:
+    case valuePrice.max:
       if (price < PRICE_FILTER_MAX) {
         return false;
       }
 
       break;
   }
-
   return true;
 };
 
-const filterAds= (ad) => {
+const filterAds = (ad) => {
 
-  for (const key of SELECT_KEYS) {
+  for (const key of SELECTOR_KEYS) {
     const value = selectValues[key];
 
-    if (value !== SELECT_KEY_ANY) {
-      if (key !== SELECT_VALUE_PRICE && String(ad.offer[key]) !== value) {
+    if (value !== 'any') {
+      if (key !== 'price' && String(ad.offer[key]) !== value) {
         return false;
       }
 
-      if (key === SELECT_VALUE_PRICE && !checkPrice(value, ad.offer[key])) {
+      if (key === 'price' && !checkPrice(value, ad.offer[key])) {
         return false;
       }
     }
   }
 
-  const featureKeys = Object.keys(features);
   const adFeatures = ad.offer.features || [];
 
-  for (const feature of featureKeys) {
+  for (const feature of FEATURE_KEYS) {
     if (features[feature] && !adFeatures.includes(feature)) {
       return false;
     }
@@ -91,9 +93,16 @@ const filterAds= (ad) => {
   return true;
 };
 
-const resetFilterValues = () => {
-  features = { ...DEFAULT_FEATURE_VALUES };
-  selectValues = { ...DEFAULT_SELECT_VALUES };
+const resetFilter = () => {
+  HOUSING_TYPE.value = 'any';
+  HOUSING_PRICE.value = 'any';
+  HOUSING_ROOMS.value = 'any';
+  HOUSING_GUESTS.value = 'any';
 };
 
-export { filterAds, setFeatureValue, setSelectValue, resetFilterValues };
+export {
+  filterAds,
+  setSelectValue,
+  setFeatureValue,
+  resetFilter
+};

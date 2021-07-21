@@ -1,4 +1,5 @@
 import { STRUNG_INDEX, NUMBER_MIN } from "./constants.js";
+
 function getRandomPositiveInteger(a, b) {
   // Чтобы не заставлять пользователя нашей функции помнить порядок аргументов,
   // реализуем поддержку передачи минимального и максимального значения в любом порядке,
@@ -102,7 +103,13 @@ const fillBy = (count, cb) => {
 };
 
 const isFunction =(arg)=>typeof arg ==='function'
-
+function debounce(callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
 export {
   fillBy,
   getRandomPositiveInteger,
@@ -117,5 +124,6 @@ export {
   getRandomItem,
   createArrayRandom,
   getPlural,
-  isFunction
+  isFunction,
+  debounce
 };
