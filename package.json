@@ -8,7 +8,11 @@
     "url": "git@github.com:htmlacademy-javascript/1685769-keksobooking-23.git"
   },
   "bugs": {
+<<<<<<< HEAD
     "url": "https://github.com/Gulmira817/1685769-keksobooking-23/issues"
+=======
+    "url": "https://github.com/htmlacademy-javascript/1685769-keksobooking-23/issues"
+>>>>>>> master
   },
   "devDependencies": {
     "browser-sync": "2.26.14",
