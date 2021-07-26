@@ -13,7 +13,9 @@ import {
   MAP_FEATURES,
   DESCRIPTION,
   PREVIEW,
-  CHECKBOXES
+  CHECKBOXES,
+  SAVE_URL,
+  FORM
 } from './constants.js';
 
 import {
@@ -21,8 +23,16 @@ import {
   setSelectValue
 } from './filters.js';
 
-import { resetImages } from './avatar.js';
+import {
+  alertError,
+  alertSuccess
+} from './dom-util.js';
 
+import { resetImages } from './avatar.js';
+import { resetMap } from './map.js';
+import {
+  saveData
+} from './api.js';
 const onTitleCheck = () => {
   const valueLength = HEADER.value.length;
   if (valueLength < NameLength.MIN) {
@@ -116,8 +126,24 @@ const resetForm = () => {
   CHECKBOXES.forEach((checkbox) => checkbox.checked = false);
 };
 
+
+const alert = () => {
+  alertSuccess();
+  resetForm();
+  resetMap();
+};
+
+const onFormSend = (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  saveData(SAVE_URL, formData, alert, alertError);
+};
+
 onRoomsCheck();
 addPriceValue();
+
 
 const addEventListeners = (onFiltersChange) => {
   HEADER.addEventListener('input', onTitleCheck);
@@ -130,7 +156,7 @@ const addEventListeners = (onFiltersChange) => {
 
   const onFilterChange = getOnFilterChange(onFiltersChange);
   const onFeatureChange = getOnFeatureChange(onFiltersChange);
-
+  FORM.addEventListener('submit', onFormSend);
   MAP_FILTERS.addEventListener('change', onFilterChange);
   MAP_FEATURES.addEventListener('change', onFeatureChange);
 };

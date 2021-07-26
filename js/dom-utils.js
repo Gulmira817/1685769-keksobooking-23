@@ -1,9 +1,12 @@
-const AD_FORM = document.querySelector('.ad-form')
-const MAP_FILTERS = document.querySelector('.map__filters')
+import { FORM, MAP_FILTERS,SUCCESS,ERROR,ERROR__LOAD,ERROR_BUTTON,SHOW_TIME } from './constants.js'
+
+const successElement = SUCCESS.cloneNode(true);
+const errorLoading = ERROR__LOAD.cloneNode(true);
+const errorAdCreation = ERROR.cloneNode(true);
 
 const FORMS = [
   {
-    element: AD_FORM,
+    element: FORM,
     disabledClass: 'ad-form--disabled',
     selector: 'fieldset.ad-form__element'
   },
@@ -18,7 +21,7 @@ const removeExtraFeatures = (elements, features) => {
   elements.forEach((element) => {
 
     const classes = element.classList[1].split('--');
-    if (!features|| !features.includes(classes[1])) {
+    if (!features || !features.includes(classes[1])) {
       element.remove();
     }
   });
@@ -26,8 +29,8 @@ const removeExtraFeatures = (elements, features) => {
 
 const renderPhotos = (element, photos) => {
   const fragment = document.createDocumentFragment();
-  if(!photos){
-     return fragment
+  if (!photos) {
+    return fragment
   }
   photos.forEach((photoUrl) => {
     const photoElement = element.cloneNode(true);
@@ -82,6 +85,63 @@ const switchForms = (enable) => {
   })
 }
 
+const deactivateFilters = () => {
+  MAP_FILTERS.classList.add('ad-form--disabled');
+  MAP_FEATURES.disabled = true;
+  MAP_FILTERS.forEach((filter) => {
+    filter.disabled = true;
+  });
+};
+
+const onError = () => {
+  document.append(errorLoading);
+  deactivateFilters();
+};
+
+
+setTimeout(() => {
+  errorLoading.remove();
+}, SHOW_TIME);
+
+const onSuccessRemove = () => {
+  successElement.remove();
+  document.removeEventListener('click', onSuccessRemove);
+};
+
+const onElementEscRemove = () => {
+  if (isEscEvent) {
+    onSuccessRemove();
+    document.removeEventListener('keydown', onElementEscRemove);
+  }
+};
+
+const alertSuccess = () => {
+  document.addEventListener('keydown', onElementEscRemove);
+  document.append(successElement);
+  document.addEventListener('keydown', onElementEscRemove);
+  document.addEventListener('click', onSuccessRemove);
+};
+
+const onErrorRemove = () => {
+  errorAdCreation.remove();
+  document.removeEventListener('click', onErrorRemove);
+  ERROR_BUTTON.removeEventListener('click', onErrorRemove);
+
+};
+
+const onErrorEscRemove = () => {
+  if (isEscEvent) {
+    onErrorRemove();
+    document.removeEventListener('keydown', onErrorEscRemove);
+  }
+};
+
+const alertError = () => {
+  document.append(errorAdCreation);
+  document.addEventListener('keydown', onErrorEscRemove);
+  document.addEventListener('click', onErrorRemove);
+  ERROR_BUTTON.addEventListener('click', onErrorRemove);
+};
 const disableForms = () => switchForms(false)
 const enableForms = () => switchForms(true)
 
@@ -92,4 +152,8 @@ export {
   disableForms,
   enableForms,
   fillPhotoOrDelete,
+  onError,
+  alertSuccess,
+  alertError
+
 };
