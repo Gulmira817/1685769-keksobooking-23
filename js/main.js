@@ -1,14 +1,13 @@
-/* eslint-disable no-console */
 import { loadData } from './api.js';
 import { DATA_URL, RERENDER_DELAY } from './constants.js';
 import { getData, storeData, prepareData } from './store.js';
 import { renderCard } from './card.js';
-import {addEventListeners } from './form.js';
-import {debounce} from './utils.js';
-import { disableForms, enableForms,onError } from './dom-utils.js';
-import { PIN_MAIN_MARKER, initMap, addAddress, addPins,removePins } from './map.js';
+import { addEventListeners } from './form.js';
+import { debounce } from './utils.js';
+import { disableForms, enableForms, onError } from './dom-utils.js';
+import { PIN_MAIN_MARKER, initMap, addAddress, addPins, removePins } from './map.js';
 import { filterAds } from './filters.js';
-import {addEventListenersImages} from './avatar.js';
+import { addEventListenersImages } from './avatar.js';
 
 const rerenderPins = () => {
   prepareData(filterAds);
@@ -26,7 +25,7 @@ const onMapSuccess = () => {
   enableForms();
   addAddress(PIN_MAIN_MARKER);
   addEventListeners(debounce((rerenderPins), RERENDER_DELAY));
-  loadData(DATA_URL, onDataLoad,onError);
+  loadData(DATA_URL, onDataLoad, onError);
 };
 
 addEventListenersImages();

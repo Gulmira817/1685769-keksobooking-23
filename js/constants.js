@@ -12,7 +12,8 @@ const PRICE_FILTER_MAX = 50000;
 const RERENDER_DELAY = 500;
 const ACCURACY = 5;
 const SHOW_TIME = 5000;
-const FORM = document.querySelector('.ad-form');
+const BODY = document.querySelector('body');
+const FORM = BODY.querySelector('.ad-form');
 const HEADER = FORM.querySelector('#title');
 const ADDRESS = FORM.querySelector('#address');
 const PRICE = FORM.querySelector('#price');
@@ -23,20 +24,24 @@ const TIME_IN = FORM.querySelector('#timein');
 const TIME_OUT = FORM.querySelector('#timeout');
 const DESCRIPTION = FORM.querySelector('#description');
 const GUESTS_NUMBER = FORM.querySelector('#capacity');
-const HOUSING_FEATURES = document.querySelector('#housing-features');
-const MAP_FILTERS = document.querySelector('.map__filters');
+const HOUSING_FEATURES = BODY.querySelector('#housing-features');
+const MAP_FILTERS = BODY.querySelector('.map__filters');
 const MAP_FEATURES = MAP_FILTERS.querySelector('.map__features');
 const HOUSING_TYPE = MAP_FILTERS.querySelector('#housing-type');
 const HOUSING_PRICE = MAP_FILTERS.querySelector('#housing-price');
 const HOUSING_ROOMS = MAP_FILTERS.querySelector('#housing-rooms');
 const HOUSING_GUESTS = MAP_FILTERS.querySelector('#housing-guests');
-const CHECKBOXES = document.querySelectorAll('input[type=checkbox]');
+const CHECKBOXES = BODY.querySelectorAll('input[type=checkbox]');
 const PREVIEW = FORM.querySelector('.ad-form-header__preview img');
 const BUTTON_RESET = FORM.querySelector('.ad-form__reset');
-const SUCCESS = document.querySelector('#success');
-const ERROR__LOAD = document.querySelector('#error-loading');
-const ERROR = document.querySelector('#error');
-const ERROR_BUTTON = document.querySelector('.error__button');
+const SUCCESS = document.querySelector('#success')
+  .content
+  .querySelector('.success');
+const ERROR__LOAD = BODY.querySelector('#error-loading').content;
+const ERROR = BODY.querySelector('#error')
+  .content
+  .querySelector('.error');
+const ERROR_BUTTON = BODY.querySelector('.error__button');
 const START_MAP_SKALE = 12;
 const DATA_URL = 'https://23.javascript.pages.academy/keksobooking/data';
 const SAVE_URL = 'https://23.javascript.pages.academy/keksobooking';
@@ -108,6 +113,7 @@ const GUESTS = ['гостя', 'гостей', 'гостей'];
 const ROOMS = ['комната', 'комнаты', 'комнат'];
 
 export {
+  BODY,
   FORM,
   MIN_INDEX,
   NUMBER_MIN,

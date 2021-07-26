@@ -102,7 +102,8 @@ const fillBy = (count, cb) => {
   return result;
 };
 
-const isFunction =(arg)=>typeof arg ==='function';
+const isFunction = (arg) => typeof arg === 'function';
+
 function debounce(callback, timeoutDelay = 500) {
   let timeoutId;
   return (...rest) => {
@@ -110,6 +111,7 @@ function debounce(callback, timeoutDelay = 500) {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 }
+
 export {
   fillBy,
   getRandomPositiveInteger,

@@ -15,8 +15,12 @@ import {
   PREVIEW,
   CHECKBOXES,
   SAVE_URL,
-  FORM
+  FORM,
+  BUTTON_RESET
+
 } from './constants.js';
+
+import { getData, prepareData } from './store.js';
 
 import {
   setFeatureValue,
@@ -24,15 +28,15 @@ import {
 } from './filters.js';
 
 import {
-  alertError,
-  alertSuccess
-} from './dom-util.js';
-
+  renderCard
+} from './card.js';
+import { addPins, removePins } from './map.js';
+import { messageSuccess, messageError } from './dom-utils.js';
 import { resetImages } from './avatar.js';
+import { saveData } from './api.js';
 import { resetMap } from './map.js';
-import {
-  saveData
-} from './api.js';
+
+
 const onTitleCheck = () => {
   const valueLength = HEADER.value.length;
   if (valueLength < NameLength.MIN) {
@@ -77,7 +81,7 @@ const addPriceValue = () => {
   PRICE.min = LIMIT_MIN_PRICE[TYPE.value];
 };
 
-const onTypeSynchronize  = () => {
+const onTypeSynchronize = () => {
   PRICE.placeholder = LIMIT_MIN_PRICE[TYPE.value];
   addPriceValue();
 };
@@ -111,8 +115,14 @@ const getOnFilterChange = (onChange) => (evt) => {
   onChange();
 };
 
-const resetForm = () => {
+const resetForm = (evt) => {
+  evt.preventDefault();
   resetImages();
+  resetMap();
+  removePins();
+  prepareData();
+  addPins(getData(), renderCard);
+
   HEADER.value = '';
   DESCRIPTION.value = '';
   PRICE.value = '';
@@ -125,44 +135,35 @@ const resetForm = () => {
 
   CHECKBOXES.forEach((checkbox) => checkbox.checked = false);
 };
-
-
-const alert = () => {
-  alertSuccess();
-  resetForm();
-  resetMap();
-};
-
 const onFormSend = (evt) => {
   evt.preventDefault();
 
   const formData = new FormData(evt.target);
 
-  saveData(SAVE_URL, formData, alert, alertError);
+  saveData(SAVE_URL, formData, messageSuccess, messageError);
 };
 
 onRoomsCheck();
 addPriceValue();
 
-
 const addEventListeners = (onFiltersChange) => {
+
+  const onFilterChange = getOnFilterChange(onFiltersChange);
+  const onFeatureChange = getOnFeatureChange(onFiltersChange);
   HEADER.addEventListener('input', onTitleCheck);
   PRICE.addEventListener('input', onPriceCheck);
   ROOM_NUMBER.addEventListener('change', onRoomsCheck);
   GUESTS_NUMBER.addEventListener('change', onRoomsCheck);
-  TYPE.addEventListener('change', onTypeSynchronize );
+  TYPE.addEventListener('change', onTypeSynchronize);
   TIME_IN.addEventListener('change', onTimeinSynchronize);
   TIME_OUT.addEventListener('change', onTimeoutSynchronize);
-
-  const onFilterChange = getOnFilterChange(onFiltersChange);
-  const onFeatureChange = getOnFeatureChange(onFiltersChange);
   FORM.addEventListener('submit', onFormSend);
   MAP_FILTERS.addEventListener('change', onFilterChange);
   MAP_FEATURES.addEventListener('change', onFeatureChange);
+  BUTTON_RESET.addEventListener('click', resetForm);
 };
 
 export {
-  addEventListeners,
-  resetForm
+  addEventListeners
 };
 

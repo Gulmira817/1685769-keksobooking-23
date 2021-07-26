@@ -1,34 +1,28 @@
-const loadData = (url,onSuccess,onError)=>{
-  const dataPromise = fetch(url);
-  dataPromise.then((response)=>{
-    if(!response.ok){
-      throw new Error('Не удалось получить данные.');
-    }
-    return response.json();
-  }).then((json)=>{
-    onSuccess(json);
-  }).catch((error)=>{
-    onError(error)
-  });
+const loadData = (url, onSuccess, onError) => {
+  fetch(url)
+    .then((response) => response.json())
+    .then((similarAds) => {
+      onSuccess(similarAds);
+    })
+    .catch(() => onError());
 };
 
-const saveData = (url, body, onSuccess, onError) => {
+const saveData = (url, body, alertSuccess, alertError) => {
   fetch(url, {
     method: 'POST',
-    body,
+    body: body,
   })
     .then((response) => {
       if (response.ok) {
-        return response.json();
+        alertSuccess();
+      } else {
+        alertError();
       }
-      throw new Error('Данные не удалось отправить.');
     })
-    .then(() => {
-      onSuccess();
-    })
-    .catch((error) => {
-      onError(error);
+    .catch(() => {
+      alertError();
     });
 };
 
- export {loadData,saveData}
+
+export { loadData, saveData };

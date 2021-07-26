@@ -1,21 +1,27 @@
-import { FORM, MAP_FILTERS,SUCCESS,ERROR,ERROR__LOAD,ERROR_BUTTON,SHOW_TIME } from './constants.js'
+import { FORM, MAP_FILTERS, ERROR__LOAD, SUCCESS, ERROR, BODY, ERROR_BUTTON } from './constants.js';
 
 const successElement = SUCCESS.cloneNode(true);
-const errorLoading = ERROR__LOAD.cloneNode(true);
-const errorAdCreation = ERROR.cloneNode(true);
+const errorElement = ERROR.cloneNode(true);
 
 const FORMS = [
   {
     element: FORM,
     disabledClass: 'ad-form--disabled',
-    selector: 'fieldset.ad-form__element'
+    selector: 'fieldset.ad-form__element',
   },
   {
     element: MAP_FILTERS,
     disabledClass: 'map__filters--disabled',
-    selector: 'select,  fieldset'
-  }
-]
+    selector: 'select,  fieldset',
+  },
+];
+
+const keys = {
+  escape: 'Escape',
+  esc: 'Escape',
+};
+
+const isEscEvent = (evt) => evt.key === keys.escape || evt.key === keys.esc;
 
 const removeExtraFeatures = (elements, features) => {
   elements.forEach((element) => {
@@ -25,21 +31,21 @@ const removeExtraFeatures = (elements, features) => {
       element.remove();
     }
   });
-}
+};
 
 const renderPhotos = (element, photos) => {
   const fragment = document.createDocumentFragment();
   if (!photos) {
-    return fragment
+    return fragment;
   }
   photos.forEach((photoUrl) => {
     const photoElement = element.cloneNode(true);
     photoElement.src = photoUrl;
-    fragment.appendChild(photoElement)
+    fragment.appendChild(photoElement);
   });
   element.remove();
   return fragment;
-}
+};
 
 const fillPhotoOrDelete = (photos, block, element) => {
   if (!photos || photos.length === 0) {
@@ -59,91 +65,78 @@ const setOrRemove = (element, value, text) => {
     element.remove();
     return;
   }
-  element.textContent = text ?? value
-}
+  element.textContent = text ? text : value;
+};
 
 const switchForm = (forms, className, selector, enable) => {
   if (enable) {
-    forms.classList.remove(className)
+    forms.classList.remove(className);
   } else {
-    forms.classList.add(className)
+    forms.classList.add(className);
   }
-  const controls = forms.querySelectorAll(selector)
+  const controls = forms.querySelectorAll(selector);
   controls.forEach((control) => {
     if (enable) {
-      control.removeAttribute('disabled')
+      control.removeAttribute('disabled');
     } else {
-      control.setAttribute('disabled', true)
+      control.setAttribute('disabled', true);
     }
-  })
-}
+  });
+};
 
 const switchForms = (enable) => {
   FORMS.forEach(({ element, disabledClass, selector }) => {
-    switchForm(element, disabledClass, selector, enable)
+    switchForm(element, disabledClass, selector, enable);
 
-  })
-}
-
-const deactivateFilters = () => {
-  MAP_FILTERS.classList.add('ad-form--disabled');
-  MAP_FEATURES.disabled = true;
-  MAP_FILTERS.forEach((filter) => {
-    filter.disabled = true;
   });
 };
 
 const onError = () => {
-  document.append(errorLoading);
-  deactivateFilters();
+  const cloneError = ERROR__LOAD.cloneNode(true);
+  BODY.append(cloneError);
 };
 
-
-setTimeout(() => {
-  errorLoading.remove();
-}, SHOW_TIME);
-
-const onSuccessRemove = () => {
+const removeSuccess = () => {
   successElement.remove();
-  document.removeEventListener('click', onSuccessRemove);
+  document.removeEventListener('click', removeSuccess);
 };
 
-const onElementEscRemove = () => {
+const removeSuccessEsc = () => {
   if (isEscEvent) {
-    onSuccessRemove();
-    document.removeEventListener('keydown', onElementEscRemove);
+    removeSuccess();
+    document.removeEventListener('keydown', removeSuccessEsc);
   }
 };
 
-const alertSuccess = () => {
-  document.addEventListener('keydown', onElementEscRemove);
-  document.append(successElement);
-  document.addEventListener('keydown', onElementEscRemove);
-  document.addEventListener('click', onSuccessRemove);
+const messageSuccess = () => {
+  BODY.append(successElement);
+  document.addEventListener('keydown', removeSuccessEsc);
+  document.addEventListener('click', removeSuccess);
 };
 
-const onErrorRemove = () => {
-  errorAdCreation.remove();
-  document.removeEventListener('click', onErrorRemove);
-  ERROR_BUTTON.removeEventListener('click', onErrorRemove);
 
+const removeError = () => {
+  errorElement.remove();
+  document.removeEventListener('click', removeError);
+  ERROR_BUTTON.addEventListener('click', removeError);
 };
 
-const onErrorEscRemove = () => {
+const removeErrorEsc = () => {
   if (isEscEvent) {
-    onErrorRemove();
-    document.removeEventListener('keydown', onErrorEscRemove);
+    removeError();
+    document.removeEventListener('keydown', removeErrorEsc);
   }
 };
 
-const alertError = () => {
-  document.append(errorAdCreation);
-  document.addEventListener('keydown', onErrorEscRemove);
-  document.addEventListener('click', onErrorRemove);
-  ERROR_BUTTON.addEventListener('click', onErrorRemove);
+const messageError = () => {
+  BODY.append(errorElement);
+  document.addEventListener('keydown', removeErrorEsc);
+  document.addEventListener('click', removeError);
+  ERROR_BUTTON.addEventListener('click', removeError);
 };
-const disableForms = () => switchForms(false)
-const enableForms = () => switchForms(true)
+
+const disableForms = () => switchForms(false);
+const enableForms = () => switchForms(true);
 
 export {
   removeExtraFeatures,
@@ -153,7 +146,6 @@ export {
   enableForms,
   fillPhotoOrDelete,
   onError,
-  alertSuccess,
-  alertError
-
+  messageSuccess,
+  messageError
 };
