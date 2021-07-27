@@ -1,4 +1,4 @@
-import { STRUNG_INDEX, NUMBER_MIN } from "./constants.js";
+import { STRUNG_INDEX, NUMBER_MIN } from './constants.js';
 
 function getRandomPositiveInteger(a, b) {
   // Чтобы не заставлять пользователя нашей функции помнить порядок аргументов,
@@ -57,7 +57,7 @@ const createGetRandomItem = (data) => {
   return getRandomItem2;
 };
 
-const isPositiveNumber = (value) => typeof value === "number" && value >= 0;
+const isPositiveNumber = (value) => typeof value === 'number' && value >= 0;
 
 const getRandomFloat = (...args) => {
   const errorIndex = args.findIndex((value) => !isPositiveNumber(value));
@@ -70,7 +70,7 @@ const getRandomFloat = (...args) => {
 };
 
 const getRandomNumber = (min, max) => getRandomFloat(min, max, 0);
-const padLeft = (index) => String(index).padStart(STRUNG_INDEX, "0");
+const padLeft = (index) => String(index).padStart(STRUNG_INDEX, '0');
 const createAuthorUrl = (index) => `img/avatars/user${padLeft(index)}.png`;
 const getRandomItem = (items) =>
   items[getRandomNumber(NUMBER_MIN, items.length - 1)];
@@ -88,11 +88,11 @@ const getPluralIdx = (count) => {
     return 1;
   }
   return 2;
-}
+};
 
-const pluralize = (count, plurals) => plurals[getPluralIdx(count)]
-const getPlural = (count, plurals) => `${count} ${pluralize(count, plurals)}`
-const createArrayRandom = (items) => items.filter(getRandomBoolean)
+const pluralize = (count, plurals) => plurals[getPluralIdx(count)];
+const getPlural = (count, plurals) => `${count} ${pluralize(count, plurals)}`;
+const createArrayRandom = (items) => items.filter(getRandomBoolean);
 
 const fillBy = (count, cb) => {
   const result = [];
@@ -102,7 +102,8 @@ const fillBy = (count, cb) => {
   return result;
 };
 
-const isFunction =(arg)=>typeof arg ==='function'
+const isFunction = (arg) => typeof arg === 'function';
+
 function debounce(callback, timeoutDelay = 500) {
   let timeoutId;
   return (...rest) => {
@@ -110,6 +111,7 @@ function debounce(callback, timeoutDelay = 500) {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 }
+
 export {
   fillBy,
   getRandomPositiveInteger,

@@ -1,42 +1,51 @@
-const AD_FORM = document.querySelector('.ad-form')
-const MAP_FILTERS = document.querySelector('.map__filters')
+import { FORM, MAP_FILTERS, ERROR__LOAD, SUCCESS, ERROR, BODY, ERROR_BUTTON } from './constants.js';
+
+const successElement = SUCCESS.cloneNode(true);
+const errorElement = ERROR.cloneNode(true);
 
 const FORMS = [
   {
-    element: AD_FORM,
+    element: FORM,
     disabledClass: 'ad-form--disabled',
-    selector: 'fieldset.ad-form__element'
+    selector: 'fieldset.ad-form__element',
   },
   {
     element: MAP_FILTERS,
     disabledClass: 'map__filters--disabled',
-    selector: 'select,  fieldset'
-  }
-]
+    selector: 'select,  fieldset',
+  },
+];
+
+const keys = {
+  escape: 'Escape',
+  esc: 'Escape',
+};
+
+const isEscEvent = (evt) => evt.key === keys.escape || evt.key === keys.esc;
 
 const removeExtraFeatures = (elements, features) => {
   elements.forEach((element) => {
 
     const classes = element.classList[1].split('--');
-    if (!features|| !features.includes(classes[1])) {
+    if (!features || !features.includes(classes[1])) {
       element.remove();
     }
   });
-}
+};
 
 const renderPhotos = (element, photos) => {
   const fragment = document.createDocumentFragment();
-  if(!photos){
-     return fragment
+  if (!photos) {
+    return fragment;
   }
   photos.forEach((photoUrl) => {
     const photoElement = element.cloneNode(true);
     photoElement.src = photoUrl;
-    fragment.appendChild(photoElement)
+    fragment.appendChild(photoElement);
   });
   element.remove();
   return fragment;
-}
+};
 
 const fillPhotoOrDelete = (photos, block, element) => {
   if (!photos || photos.length === 0) {
@@ -56,34 +65,78 @@ const setOrRemove = (element, value, text) => {
     element.remove();
     return;
   }
-  element.textContent = text ?? value
-}
+  element.textContent = text ? text : value;
+};
 
 const switchForm = (forms, className, selector, enable) => {
   if (enable) {
-    forms.classList.remove(className)
+    forms.classList.remove(className);
   } else {
-    forms.classList.add(className)
+    forms.classList.add(className);
   }
-  const controls = forms.querySelectorAll(selector)
+  const controls = forms.querySelectorAll(selector);
   controls.forEach((control) => {
     if (enable) {
-      control.removeAttribute('disabled')
+      control.removeAttribute('disabled');
     } else {
-      control.setAttribute('disabled', true)
+      control.setAttribute('disabled', true);
     }
-  })
-}
+  });
+};
 
 const switchForms = (enable) => {
   FORMS.forEach(({ element, disabledClass, selector }) => {
-    switchForm(element, disabledClass, selector, enable)
+    switchForm(element, disabledClass, selector, enable);
 
-  })
-}
+  });
+};
 
-const disableForms = () => switchForms(false)
-const enableForms = () => switchForms(true)
+const onError = () => {
+  const cloneError = ERROR__LOAD.cloneNode(true);
+  BODY.append(cloneError);
+};
+
+const removeSuccess = () => {
+  successElement.remove();
+  document.removeEventListener('click', removeSuccess);
+};
+
+const removeSuccessEsc = () => {
+  if (isEscEvent) {
+    removeSuccess();
+    document.removeEventListener('keydown', removeSuccessEsc);
+  }
+};
+
+const messageSuccess = () => {
+  BODY.append(successElement);
+  document.addEventListener('keydown', removeSuccessEsc);
+  document.addEventListener('click', removeSuccess);
+};
+
+
+const removeError = () => {
+  errorElement.remove();
+  document.removeEventListener('click', removeError);
+  ERROR_BUTTON.addEventListener('click', removeError);
+};
+
+const removeErrorEsc = () => {
+  if (isEscEvent) {
+    removeError();
+    document.removeEventListener('keydown', removeErrorEsc);
+  }
+};
+
+const messageError = () => {
+  BODY.append(errorElement);
+  document.addEventListener('keydown', removeErrorEsc);
+  document.addEventListener('click', removeError);
+  ERROR_BUTTON.addEventListener('click', removeError);
+};
+
+const disableForms = () => switchForms(false);
+const enableForms = () => switchForms(true);
 
 export {
   removeExtraFeatures,
@@ -92,4 +145,7 @@ export {
   disableForms,
   enableForms,
   fillPhotoOrDelete,
+  onError,
+  messageSuccess,
+  messageError
 };

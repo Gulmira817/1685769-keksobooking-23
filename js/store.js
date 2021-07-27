@@ -1,23 +1,23 @@
-import {isFunction} from './utils.js'
-let initialData=null;
-let preparedData=null;
-const MAX_ROWS=10;
+import { isFunction } from './utils.js';
 
-const prepareData=(filterFn)=>{
+let initialData = null;
+let preparedData = null;
+const MAX_ROWS = 10;
+
+const prepareData = (filterFn) => {
   preparedData = [...initialData];
 
-  if((isFunction(filterFn))){
-    preparedData = preparedData.filter(filterFn)
+  if ((isFunction(filterFn))) {
+    preparedData = preparedData.filter(filterFn);
   }
-  preparedData=preparedData.slice(0,MAX_ROWS)
-}
+  preparedData = preparedData.slice(0, MAX_ROWS);
+};
 
-const getData=()=>preparedData
+const getData = () => preparedData;
 
-
-const storeData=(data)=>{
+const storeData = (data) => {
   initialData = data;
   preparedData = data;
-}
+};
 
-export {getData,storeData,prepareData}
+export { getData, storeData, prepareData };

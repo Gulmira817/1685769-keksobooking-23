@@ -11,51 +11,61 @@ const PRICE_FILTER_MIN = 10000;
 const PRICE_FILTER_MAX = 50000;
 const RERENDER_DELAY = 500;
 const ACCURACY = 5;
-const FORM = document.querySelector('.ad-form')
-const HEADER = FORM.querySelector('#title')
-const ADDRESS = FORM.querySelector('#address')
-const PRICE = FORM.querySelector('#price')
-const ROOM_NUMBER = FORM.querySelector('#room_number')
-const CAPACITY = FORM.querySelector('#capacity')
-const TYPE = FORM.querySelector('#type')
-const TIME_IN = FORM.querySelector('#timein')
-const TIME_OUT = FORM.querySelector('#timeout')
+const SHOW_TIME = 5000;
+const BODY = document.querySelector('body');
+const FORM = BODY.querySelector('.ad-form');
+const HEADER = FORM.querySelector('#title');
+const ADDRESS = FORM.querySelector('#address');
+const PRICE = FORM.querySelector('#price');
+const ROOM_NUMBER = FORM.querySelector('#room_number');
+const CAPACITY = FORM.querySelector('#capacity');
+const TYPE = FORM.querySelector('#type');
+const TIME_IN = FORM.querySelector('#timein');
+const TIME_OUT = FORM.querySelector('#timeout');
 const DESCRIPTION = FORM.querySelector('#description');
 const GUESTS_NUMBER = FORM.querySelector('#capacity');
-const HOUSING_FEATURES = document.querySelector('#housing-features')
-const MAP_FILTERS = document.querySelector('.map__filters')
+const HOUSING_FEATURES = BODY.querySelector('#housing-features');
+const MAP_FILTERS = BODY.querySelector('.map__filters');
 const MAP_FEATURES = MAP_FILTERS.querySelector('.map__features');
 const HOUSING_TYPE = MAP_FILTERS.querySelector('#housing-type');
 const HOUSING_PRICE = MAP_FILTERS.querySelector('#housing-price');
 const HOUSING_ROOMS = MAP_FILTERS.querySelector('#housing-rooms');
 const HOUSING_GUESTS = MAP_FILTERS.querySelector('#housing-guests');
-const CHECKBOXES = document.querySelectorAll('input[type=checkbox]');
+const CHECKBOXES = BODY.querySelectorAll('input[type=checkbox]');
 const PREVIEW = FORM.querySelector('.ad-form-header__preview img');
 const BUTTON_RESET = FORM.querySelector('.ad-form__reset');
+const SUCCESS = document.querySelector('#success')
+  .content
+  .querySelector('.success');
+const ERROR__LOAD = BODY.querySelector('#error-loading').content;
+const ERROR = BODY.querySelector('#error')
+  .content
+  .querySelector('.error');
+const ERROR_BUTTON = BODY.querySelector('.error__button');
 const START_MAP_SKALE = 12;
 const DATA_URL = 'https://23.javascript.pages.academy/keksobooking/data';
 const SAVE_URL = 'https://23.javascript.pages.academy/keksobooking';
 
 const PHOTOS_URL =
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking";
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking';
 
 const TITLES = [
-  "Квартира вашей мечты",
-  "Уютная квартира",
-  "Квартира  студия",
-  "Смарт квартира ",
+  'Квартира вашей мечты',
+  'Уютная квартира',
+  'Квартира  студия',
+  'Смарт квартира ',
 ];
 
-const TYPES = ["palace", "flat", "house", "bungalow", "hotel"];
-const TIME_SLOTS = ["12:00", "13:00", "14:00"];
+const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const TIME_SLOTS = ['12:00', '13:00', '14:00'];
 
 const FEATURES = [
-  "wifi",
-  "dishwasher",
-  "parking",
-  "washer",
-  "elevator",
-  "conditioner",
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
 ];
 
 const PHOTOS = [
@@ -65,9 +75,9 @@ const PHOTOS = [
 ];
 
 const DESCRIPTIONS = [
-  "Очень тихое, уютное место , где будет царить покой и порядок",
-  "Квартира очень большая и просторная с камином, фортепиано и аквариум",
-  "Находиться в центре города,рядом удобный транспорт",
+  'Очень тихое, уютное место , где будет царить покой и порядок',
+  'Квартира очень большая и просторная с камином, фортепиано и аквариум',
+  'Находиться в центре города,рядом удобный транспорт',
 ];
 
 const Location = {
@@ -99,10 +109,11 @@ const NameLength = {
   MAX: 100,
 };
 
-const GUESTS = ["гостя", "гостей", "гостей"]
-const ROOMS = ["комната", "комнаты", "комнат"]
+const GUESTS = ['гостя', 'гостей', 'гостей'];
+const ROOMS = ['комната', 'комнаты', 'комнат'];
 
 export {
+  BODY,
   FORM,
   MIN_INDEX,
   NUMBER_MIN,
@@ -128,21 +139,21 @@ export {
   PRICE_FILTER_MAX,
   HEADER,
   ADDRESS,
-  PRICE ,
+  PRICE,
   ROOM_NUMBER,
-  CAPACITY ,
-  TYPE ,
+  CAPACITY,
+  TYPE,
   TIME_IN,
-  TIME_OUT ,
-  DESCRIPTION ,
+  TIME_OUT,
+  DESCRIPTION,
   FEATURES,
-  MAP_FILTERS ,
-  MAP_FEATURES ,
+  MAP_FILTERS,
+  MAP_FEATURES,
   HOUSING_TYPE,
   HOUSING_PRICE,
-  HOUSING_ROOMS ,
-  HOUSING_GUESTS ,
-  CHECKBOXES ,
+  HOUSING_ROOMS,
+  HOUSING_GUESTS,
+  CHECKBOXES,
   SAVE_URL,
   HOUSING_FEATURES,
   GUESTS_NUMBER,
@@ -151,6 +162,11 @@ export {
   NameLength,
   RERENDER_DELAY,
   START_MAP_SKALE,
-   ACCURACY,
-  BUTTON_RESET
+  ACCURACY,
+  BUTTON_RESET,
+  SUCCESS,
+  ERROR__LOAD,
+  ERROR,
+  ERROR_BUTTON,
+  SHOW_TIME
 };
