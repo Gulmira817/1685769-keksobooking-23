@@ -115,7 +115,7 @@ const getOnFilterChange = (onChange) => (evt) => {
   onChange();
 };
 
-const resetForm = (evt) => {
+const onResetForm = (evt) => {
   evt.preventDefault();
   resetImages();
   resetMap();
@@ -137,10 +137,9 @@ const resetForm = (evt) => {
 };
 const onFormSend = (evt) => {
   evt.preventDefault();
-
   const formData = new FormData(evt.target);
-
   saveData(SAVE_URL, formData, messageSuccess, messageError);
+  onResetForm(evt);
 };
 
 onRoomsCheck();
@@ -160,7 +159,7 @@ const addEventListeners = (onFiltersChange) => {
   FORM.addEventListener('submit', onFormSend);
   MAP_FILTERS.addEventListener('change', onFilterChange);
   MAP_FEATURES.addEventListener('change', onFeatureChange);
-  BUTTON_RESET.addEventListener('click', resetForm);
+  BUTTON_RESET.addEventListener('click', onResetForm);
 };
 
 export {
